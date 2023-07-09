@@ -21,7 +21,6 @@ export const ContactForm = () => {
       ({ name }) => name.toLowerCase() === values.name.toLowerCase()
     );
 
-    // якщо такий контакт вже є, то виводимо повідомлення
     if (isInContacts) {
       return toast.warn(`${values.name} is already in contacts.`);
     }
