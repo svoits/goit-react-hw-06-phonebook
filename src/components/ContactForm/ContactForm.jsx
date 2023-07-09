@@ -1,15 +1,32 @@
 import PropTypes from 'prop-types';
 import { Formik, ErrorMessage } from 'formik';
 import { Button, Input, Label, StyledForm } from './ContactForm.styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/contactsSlice';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const defaultValues = {
   name: '',
   number: '',
 };
 
-export const ContactForm = ({ onSubmit }) => {
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
+
   const handleSubmitForm = (values, action) => {
-    onSubmit(values);
+    const isInContacts = contacts.some(
+      ({ name }) => name.toLowerCase() === values.name.toLowerCase()
+    );
+
+    // якщо такий контакт вже є, то виводимо повідомлення
+    if (isInContacts) {
+      return toast.warn(`${values.name} is already in contacts.`);
+    }
+
+    dispatch(addContact(values));
     action.resetForm();
   };
 

@@ -36,7 +36,3 @@ export const FilterTitle = styled.p`
   text-align: center;
   color: white;
 `;
-
-export const NoContacts = styled.p`
-  color: white;
-`;

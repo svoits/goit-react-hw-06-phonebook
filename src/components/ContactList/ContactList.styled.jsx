@@ -30,3 +30,7 @@ export const Button = styled.button`
   font-size: 16px;
   font-family: inherit;
 `;
+
+export const NoContacts = styled.p`
+  color: white;
+`;
